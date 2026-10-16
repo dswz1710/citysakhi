@@ -199,9 +199,12 @@ $("nearbyLocationBtn").addEventListener("click",()=>{
    const kind=$("nearbyKind").value;
    const query=kind+" near "+latitude+","+longitude+", "+c.name+", India";
    const url="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query);
-   if(tab) tab.location.href=url;
-   else status.textContent="Your browser blocked the map tab. Enter an area or address and use the regular search button.";
-   status.textContent="Opening Google Maps near your current location. Check current hours, reviews and directions there.";
+   if(tab){
+    tab.location.href=url;
+    status.textContent="Opening Google Maps near your current location. Check current hours, reviews and directions there.";
+   }else{
+    status.textContent="Your browser blocked the map tab. Enter an area or address and use the regular search button.";
+   }
   },
   error=>{
    if(tab) tab.close();
