@@ -188,6 +188,9 @@ $("nearbyLocationBtn").addEventListener("click",()=>{
   status.textContent="Current location is not supported by this browser. Enter an area or address instead.";
   return;
  }
+ // Open a tab immediately from the click so browser popup blockers do not block it after location lookup.
+ const tab=window.open("about:blank","_blank");
+ if(tab) tab.opener=null;
  status.textContent="Requesting location permission…";
  navigator.geolocation.getCurrentPosition(
   position=>{
@@ -196,11 +199,12 @@ $("nearbyLocationBtn").addEventListener("click",()=>{
    const kind=$("nearbyKind").value;
    const query=kind+" near "+latitude+","+longitude+", "+c.name+", India";
    const url="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query);
-   const tab=window.open(url,"_blank");
-   if(tab) tab.opener=null;
+   if(tab) tab.location.href=url;
+   else status.textContent="Your browser blocked the map tab. Enter an area or address and use the regular search button.";
    status.textContent="Opening Google Maps near your current location. Check current hours, reviews and directions there.";
   },
   error=>{
+   if(tab) tab.close();
    status.textContent=error.code===1
     ?"Location permission was denied. Enter an area or address instead."
     :"Could not get your location. Check your device settings or enter an area or address instead.";
