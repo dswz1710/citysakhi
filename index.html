@@ -173,7 +173,7 @@ const nearbyCategoryTags={
 };
 const nearbyCategoryNames={grocery:"Groceries and supermarkets",pharmacy:"Pharmacy",clinic:"Clinic or hospital",food:"Food places",cafe:"Café",laundry:"Laundry",atm:"ATM or bank",transport:"Public transport",toilet:"Public toilet"};
 function escapeHtml(value){return String(value||"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
-function distanceKm(a,b,c,d){const rad=n=>n*Math.PI/180;const x=rad(c-a),y=rad(d-b);const h=Math.sin(x/2)**2+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(rad(y/2)**2;return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
+function distanceKm(a,b,c,d){const rad=n=>n*Math.PI/180;const x=rad(c-a),y=rad(d-b);const h=Math.sin(x/2)**2+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(y/2)**2;return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
 function nearbyBudgetNote(category){
  if(category==="food"||category==="cafe")return "Budget tip: compare menu prices and recent reviews before ordering; verified prices are not available in this data.";
  if(category==="grocery")return "Budget tip: compare unit prices and offers in-store; no price list is available here.";
