@@ -120,22 +120,39 @@ citySel.addEventListener("change",updateHubs);typeSel.addEventListener("change",
 cities.forEach(c=>citySel.add(new Option(c.name,c.id)));updateHubs();renderCards();
 $("easyReadBtn").addEventListener("click",()=>{const on=$("easyReadBtn").getAttribute("aria-pressed")!=="true";$("easyReadBtn").setAttribute("aria-pressed",String(on));document.body.style.fontSize=on?"21px":"18px";$("easyReadBtn").textContent=on?"Return to standard text −":"Make text bigger +";});
 const taskBoxes=[...document.querySelectorAll("[data-task]")];
-function updateChecklist(){let done=0;taskBoxes.forEach(box=>{const saved=localStorage.getItem("citysakhi-task-"+box.dataset.task)==="true";box.checked=saved;if(saved)done++;});$("checkProgressText").textContent=`${done} of ${taskBoxes.length} tasks complete`; $("progressFill").style.width=`${done/taskBoxes.length*100}%`;document.querySelector(".progressbar").setAttribute("aria-valuenow",String(done));}
-taskBoxes.forEach(box=>box.addEventListener("change",()=>{localStorage.setItem("citysakhi-task-"+box.dataset.task,String(box.checked));updateChecklist();
-const ageTips = {
- under18:[["🎓","Student safety","Share your arrival and accommodation details with a trusted adult. Use official campus or school contacts for help."],["🚌","First commute","Practise the route in daylight with a trusted person if possible, and note the correct stop and return route."]],
- "18to24":[["💸","Stretch your budget","Compare official public transport fares, student concessions if available, shared essentials and affordable meals near home or campus."],["🧭","Build your routine","Try your commute once before your first work or college day. Save your building entrance and nearest stop."]],
- "25to39":[["🗓️","Plan for daily life","Compare weekly and monthly commute costs, check rush-hour conditions, and shortlist grocery, pharmacy and laundry options."],["🏠","Settle in","Keep rental terms and payment receipts, confirm utility arrangements, and avoid sending deposits before verifying a property and agreement."]],
- "40to59":[["🧳","Keep travel simple","Confirm terminal names, check transfer time, and keep booking references and your accommodation address available offline."],["📍","Know your area","Save a nearby pharmacy, clinic and transport stop, and check their opening hours before relying on them."]],
- "60plus":[["♿","Comfort and access","Check step-free access, lifts, seating and walking distances with the transport operator; allow extra time for transfers."],["☎️","Keep support close","Carry important contact details and essential medication, and let a trusted person know your travel plan."]]
+function updateChecklist(){
+ let done=0;
+ taskBoxes.forEach(box=>{
+  const saved=localStorage.getItem("citysakhi-task-"+box.dataset.task)==="true";
+  box.checked=saved;
+  if(saved)done++;
+ });
+ $("checkProgressText").textContent=`${done} of ${taskBoxes.length} tasks complete`;
+ $("progressFill").style.width=`${done/taskBoxes.length*100}%`;
+ document.querySelector(".progressbar").setAttribute("aria-valuenow",String(done));
+}
+taskBoxes.forEach(box=>box.addEventListener("change",()=>{
+ localStorage.setItem("citysakhi-task-"+box.dataset.task,String(box.checked));
+ updateChecklist();
+}));
+$("resetChecklist").addEventListener("click",()=>{
+ taskBoxes.forEach(box=>localStorage.removeItem("citysakhi-task-"+box.dataset.task));
+ updateChecklist();
+});
+const ageTips={
+ under18:[["🎓","Student safety","Share your arrival and accommodation details with a parent, guardian or trusted adult. Use official school or campus contacts for help."],["🚌","First commute","Practise the route in daylight with a trusted person if possible. Save the correct stop and return route."]],
+ "18to24":[["💸","Stretch your budget","Compare official public transport fares and any eligible student concessions. Find affordable meals and essentials near home or campus."],["🧭","Build your routine","Try your commute before the first work or college day. Save your building entrance and nearest stop."]],
+ "25to39":[["🗓️","Plan daily life","Compare weekly and monthly commute costs, and shortlist grocery, pharmacy and laundry options."],["🏠","Settle in safely","Keep rental terms and receipts. Verify a property and agreement before paying a deposit."]],
+ "40to59":[["🧳","Keep travel simple","Confirm terminal names and transfer times. Keep booking references and your accommodation address available offline."],["📍","Know your area","Save nearby transport, pharmacy and clinic searches; check opening hours before relying on them."]],
+ "60plus":[["♿","Comfort and access","Confirm lifts, step-free access, seating and walking distances with operators. Allow extra time for transfers."],["☎️","Keep support close","Keep essential medication and emergency contacts easy to reach, and let a trusted person know your travel plan."]]
 };
 function renderPersonalTips(){
  const age=$("ageGroup").value,purpose=$("tripPurpose").value,needs=$("accessNeeds").value;
  const purposeText={college:"For study: check official student support and campus transport.",work:"For work: test your commute and confirm the office entrance and shift end time.",tourism:"For tourism: check official opening hours, ticket rules and the return route.",medical:"For medical visits: confirm the entrance, appointment time and required documents.",family:"For family visits: agree on an exact pickup point with your host."}[purpose];
- const needText={stepfree:"Prioritise verified step-free routes and confirm lifts with operators.",lesswalking:"Compare walking distance for transfers and the final leg.",budget:"Check official fare information and total trip cost before travelling.",welllit:"Prefer practical, busy pickup points and share your route with a trusted person.",none:"Check the exact pickup point and keep a backup route."}[needs];
- const cards=[...(ageTips[age]||ageTips["18to24"]),["🗺️","Your trip","".replace("",purposeText)],["✨","Your preference",needText]];
+ const needText={stepfree:"Prefer routes with verified step-free access; confirm lifts and ramps with the operator.",lesswalking:"Compare walking distances at transfers and at the final destination.",budget:"Compare official fare information and the whole trip cost, including the last leg.",welllit:"Prefer practical, busy pickup points and share the trip with someone you trust.",none:"Check the exact pickup point and keep a backup route."}[needs];
+ const cards=[...(ageTips[age]||ageTips["18to24"]),["🗺️","Your trip",purposeText],["✨","Your preference",needText]];
  $("personalTips").innerHTML=cards.map(card=>'<article class="feature"><div class="ico">'+card[0]+'</div><h3>'+card[1]+'</h3><p>'+card[2]+'</p></article>').join("");
- $("ageTipsIntro").textContent="Personalised for your age group, trip purpose and access preferences. No account or date of birth required.";
+ $("ageTipsIntro").textContent="Personalised for your selected age group, trip purpose and access preferences. No account or date of birth required.";
 }
 ["ageGroup","tripPurpose","accessNeeds"].forEach(id=>$(id).addEventListener("change",renderPersonalTips));
 renderPersonalTips();
@@ -151,7 +168,5 @@ $("nearbyBtn").addEventListener("click",()=>{
  const url="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query);
  window.open(url,"_blank","noopener");
 });
-}));
-$("resetChecklist").addEventListener("click",()=>{taskBoxes.forEach(box=>localStorage.removeItem("citysakhi-task-"+box.dataset.task));updateChecklist();});
 updateChecklist();
 </script></body></html>
