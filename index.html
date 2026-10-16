@@ -220,11 +220,12 @@ async function searchNearby(origin,locationLabel){
 }
 async function resolveNearbyArea(area){
  const c=cities.find(x=>x.id===nearbyCity.value),query=area+", "+c.name+", India";
- const response=await fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q="+encodeURIComponent(query),{headers:{"Accept":"application/json"}});
+ const response=await fetch("https://photon.komoot.io/api/?limit=1&q="+encodeURIComponent(query),{headers:{"Accept":"application/json"}});
  if(!response.ok)throw new Error("Could not look up that area.");
- const matches=await response.json();
- if(!matches.length)throw new Error("Area not found. Try a nearby neighbourhood, landmark or fuller address.");
- return {lat:Number(matches[0].lat),lon:Number(matches[0].lon),label:matches[0].display_name||query};
+ const data=await response.json(),feature=(data.features||[])[0];
+ if(!feature||!feature.geometry||!feature.geometry.coordinates)throw new Error("Area not found. Try a nearby neighbourhood, landmark or fuller address.");
+ const coords=feature.geometry.coordinates;
+ return {lat:Number(coords[1]),lon:Number(coords[0]),label:feature.properties.name||query};
 }
 $("nearbyBtn").addEventListener("click",async()=>{
  const area=$("nearbyArea").value.trim(),status=$("nearbyStatus");
