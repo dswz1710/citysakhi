@@ -45,6 +45,7 @@ const cities=[
 {id:"kochi",name:"Kochi",emoji:"🌴",tag:"Metro, water metro & coastal escapes",color:"#dcece8",hubs:{airport:["Cochin International Airport (COK)"],railway:["Ernakulam Junction (South)","Ernakulam Town (North)","Aluva Railway Station"],bus:["Vyttila Mobility Hub","Kaloor bus stand","Angamaly bus pickup — check your ticket","Other bus pickup — check your ticket"]},official:[["Airport","https://www.cial.aero/"],["Kochi Metro & Water Metro","https://kochimetro.org/"],["Indian Railways","https://indianrailways.gov.in/"]],note:"Kochi Airport is outside the central metro corridor. Check the airport-to-Aluva connection and onward metro options, and verify the current service details."}
 ];
 const $=id=>document.getElementById(id), citySel=$("city"), typeSel=$("arrivalType"), hubSel=$("startHub"), detail=$("cityDetail");
+cities.forEach(c=>citySel.add(new Option(c.name,c.id)));
 function hubList(c,type){return c.hubs[type]||[]}
 function updateHubs(){const c=cities.find(x=>x.id===citySel.value);hubSel.innerHTML=hubList(c,typeSel.value).map(x=>`<option>${x}</option>`).join("");}
 function renderCards(){$("cityCards").innerHTML=cities.map(c=>`<article class="citycard" style="--blob:${c.color}"><div class="emoji" aria-hidden="true">${c.emoji}</div><h3>${c.name}</h3><p>${c.tag}</p><button type="button" data-city="${c.id}">Explore ${c.name} ↗</button></article>`).join("");$("cityCards").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>showCity(b.dataset.city)));}
@@ -117,7 +118,7 @@ const people=[ageAdvice[ageGroup],purposeAdvice[tripPurpose],accessAdvice[access
  res.scrollIntoView({behavior:"smooth",block:"nearest"});
 });
 citySel.addEventListener("change",updateHubs);typeSel.addEventListener("change",updateHubs);
-cities.forEach(c=>citySel.add(new Option(c.name,c.id)));updateHubs();renderCards();
+updateHubs();renderCards();
 $("easyReadBtn").addEventListener("click",()=>{const on=$("easyReadBtn").getAttribute("aria-pressed")!=="true";$("easyReadBtn").setAttribute("aria-pressed",String(on));document.body.style.fontSize=on?"21px":"18px";$("easyReadBtn").textContent=on?"Return to standard text −":"Make text bigger +";});
 const taskBoxes=[...document.querySelectorAll("[data-task]")];
 function updateChecklist(){
