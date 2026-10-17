@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dswz1710.github.io/citysakhi/sitemap.xml
