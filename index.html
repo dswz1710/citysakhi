@@ -295,27 +295,8 @@ footer{padding-top:48px;padding-bottom:48px}
 .discover-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:20px;background:#fff;border:1px solid #dce5df}.discover-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}.discover-card{overflow:hidden;border:1px solid #dfe5e0;background:#fff;box-shadow:0 10px 28px #17352d0b;display:flex;flex-direction:column;min-width:0}.discover-photo{height:205px;background:#e5ece7;position:relative;overflow:hidden}.discover-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.discover-card:hover .discover-photo img{transform:scale(1.035)}.discover-photo .photo-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#476b5e;background:linear-gradient(135deg,#dce9e0,#f2e7d8);font-size:2rem}.discover-body{padding:20px;display:flex;flex-direction:column;flex:1}.discover-type{font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:#537868}.discover-body h3{font-size:1.25rem;line-height:1.25;margin:9px 0}.discover-body p{font-size:.91rem;line-height:1.6}.discover-facts{display:grid;gap:9px;border-top:1px solid #e4e9e5;padding-top:13px;margin-top:auto}.discover-fact{font-size:.83rem;color:#52675f}.discover-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.discover-actions a{font-size:.8rem}.photo-credit{font-size:.68rem;color:#66766f;margin-top:8px}.discover-review-note{font-size:.75rem;color:#65756f;margin-top:10px}.discover-fit{background:#f4f7f3;border-radius:10px;padding:12px 14px;margin:8px 0 14px}.discover-fit strong,.discover-practical strong{font-size:.8rem;color:#244d40}.discover-fit p,.discover-practical p{margin:5px 0 0;font-size:.84rem;line-height:1.55;color:#52675f}.discover-practical{display:grid;gap:12px;border-top:1px solid #e4e9e5;padding-top:13px;margin-top:13px}.discover-practical>div{padding-left:11px;border-left:3px solid #d8e5dc}@media(max-width:900px){.discover-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.discover-grid,.discover-controls{grid-template-columns:1fr}.discover-photo{height:220px}}</style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G3RH7GJ4V0">
-const explorePlaces={
-bengaluru:[["Lalbagh Botanical Garden","nature","Best for gardens, photography and relaxed walks.","Allow 1–2 hours."],["Cubbon Park","nature","A central green escape that pairs well with nearby museums.","Allow 1–2 hours."],["Bengaluru Palace","heritage","Distinctive royal architecture; consider entry costs before visiting.","Allow 1–2 hours."],["KR Market","experience","A lively local market, especially interesting for early-morning photography.","Allow 45–90 minutes."]],
-mumbai:[["Gateway of India","heritage","An iconic waterfront landmark and a classic first stop.","Allow 30–60 minutes."],["Marine Drive","nature","A scenic seaside walk, particularly around sunset.","Allow 1–2 hours."],["Chhatrapati Shivaji Maharaj Vastu Sangrahalaya","heritage","A substantial museum for art and history lovers.","Allow 2–3 hours."],["Colaba Causeway","experience","Bustling street shopping and neighbourhood atmosphere.","Allow 1–2 hours."]],
-delhi:[["Humayun's Tomb","heritage","Mughal architecture and landscaped gardens.","Allow 1–2 hours."],["Lodhi Garden","nature","Peaceful greenery with historic monuments.","Allow 1–2 hours."],["Qutub Minar","heritage","A major historic landmark and monument complex.","Allow 1–2 hours."],["Chandni Chowk","experience","Old Delhi's busy markets and food culture; expect crowds.","Allow 1–3 hours."]],
-pune:[["Aga Khan Palace","heritage","A significant heritage site with connections to India's independence movement.","Allow 1–2 hours."],["Shaniwar Wada","heritage","A historic fortification in central Pune.","Allow 1 hour."],["Sinhagad Fort","nature","Hilltop views and a popular outdoor excursion; check conditions.","Allow half a day."],["Pataleshwar Cave Temple","heritage","Rock-cut architecture for a shorter cultural stop.","Allow 30–60 minutes."]],
-hyderabad:[["Charminar","heritage","Hyderabad's signature landmark amid lively streets.","Allow 1–2 hours."],["Golconda Fort","heritage","Expansive historic fort and viewpoints; expect walking.","Allow 2–3 hours."],["Salar Jung Museum","heritage","Extensive art and heritage collections.","Allow 2–3 hours."],["Hussain Sagar Lake","nature","Lakeside views and a relaxed evening option.","Allow 1–2 hours."]],
-kochi:[["Fort Kochi waterfront","experience","Heritage streets, coastal views and the Chinese fishing nets.","Allow 1–3 hours."],["Mattancherry Palace","heritage","Local history and murals; check opening days.","Allow 1 hour."],["Jew Town","experience","Atmospheric heritage lanes, antique shops and cafés.","Allow 1–2 hours."],["Marine Drive Kochi","nature","Waterfront promenade for a leisurely walk.","Allow 1 hour."]]
-};
-function renderExplore(){
- const city=$("exploreCity").value,type=$("exploreType").value;
- const items=(explorePlaces[city]||[]).filter(p=>type==="all"||p[1]===type);
- const cityName=cities.find(c=>c.id===city)?.name||city;
- $("exploreResults").innerHTML=items.length?items.map((p,i)=>{
- const query=encodeURIComponent(p[0]+", "+cityName+", India");
- const reviewUrl="https://www.google.com/maps/search/?api=1&query="+query;
- return '<article class="explore-card"><span class="explore-index">'+String(i+1).padStart(2,"0")+' / '+escapeHtml(p[1])+'</span><h3>'+escapeHtml(p[0])+'</h3><p>'+escapeHtml(p[2])+'</p><p class="explore-duration">'+escapeHtml(p[3])+' · Suggested visit time</p><a class="pilllink" href="'+reviewUrl+'" target="_blank" rel="noopener">See map & current reviews ↗</a></article>';
- }).join(""):'<p class="muted">No picks in this category yet. Try All experiences.</p>';
-}
-$("exploreCity").addEventListener("change",renderExplore);
-$("exploreType").addEventListener("change",renderExplore);
-renderExplore();
+</script>
+
 </script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -328,7 +309,7 @@ renderExplore();
 <div class="easybar"><p><strong>Easy-read mode:</strong> clearer text and big buttons for everyone.</p><button id="easyReadBtn" type="button" aria-pressed="false">Make text bigger +</button></div>
 <nav><a class="brand" href="#"><span class="logo">✦</span> citysakhi</a><div class="navlinks"><a href="#start-here">Get started</a><a href="#cities">Explore cities</a><a href="#arrival-guides">Arrival guides</a><a href="#discover">Places to visit</a><a href="#first-seven-days">First 7 days</a></div><a class="btn secondary" href="#start-here">Get started ↗</a></nav>
 <main>
-<section class="hero"><div><div class="eyebrow"><span></span> YOUR FRIEND IN A NEW CITY</div><h1>Your first city,<br><em>made easier.</em></h1><p class="lead">Moving for college, starting a job or visiting somewhere new? Get practical arrival guidance, plan your first journey and keep the essentials for your first week in one calm, useful place.</p><div class="heroactions"><a class="btn primary" href="#cities">Explore the cities ↓</a><a class="btn secondary" href="#planner">Plan a journey</a></div></div>
+<section class="hero"><div><div class="eyebrow"><span></span> YOUR FRIEND IN A NEW CITY</div><h1>Your first city,<br><em>made easier.</em></h1><p class="lead">Moving for college, starting a job or visiting somewhere new? Get practical arrival guidance, plan your first journey and keep the essentials for your first week in one calm, useful place.</p><div class="heroactions"><a class="btn primary" href="#cities">Explore the cities ↓</a><a class="btn secondary" href="#planner">Plan a journey</a><button class="btn secondary" id="shareSiteBtn" type="button">Share CitySakhi ↗</button></div><p id="shareSiteStatus" class="muted" role="status" aria-live="polite" style="font-size:.88rem;margin-top:10px"></p></div>
 <div class="heroart" aria-label="Friendly illustration of a city"><div class="sunblob"></div><div class="sticker s1">✿ You’ve got this!</div><div class="postcard"><div class="posttop"><span>YOUR NEW CHAPTER</span><span>INDIA · 01</span></div><div class="illustration"><div class="sun"></div><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div><div class="building b4"></div><div class="route"></div></div><strong>Find your feet, one step at a time.</strong><div class="posttop"><span>Routes · Food · First-week tips</span><span>♡</span></div></div><div class="sticker s2">☕ Budget-friendly finds</div></div></section>
 <div class="quickstrip" aria-label="CitySakhi highlights">
   <div class="quickitem"><div class="quickicon" aria-hidden="true">🧭</div><div><strong>Start from your arrival point</strong><span>Airport, station or bus stand</span></div></div>
@@ -716,4 +697,54 @@ function renderDiscover(){
  }).join("");
 }
 discoverCity.addEventListener("change",renderDiscover);discoverCategory.addEventListener("change",renderDiscover);renderDiscover();
+
+// Explore cards are initialized after the page markup and shared helpers are available.
+const explorePlaces={
+bengaluru:[["Lalbagh Botanical Garden","nature","Best for gardens, photography and relaxed walks.","Allow 1–2 hours."],["Cubbon Park","nature","A central green escape that pairs well with nearby museums.","Allow 1–2 hours."],["Bengaluru Palace","heritage","Distinctive royal architecture; consider entry costs before visiting.","Allow 1–2 hours."],["KR Market","experience","A lively local market, especially interesting for early-morning photography.","Allow 45–90 minutes."]],
+mumbai:[["Gateway of India","heritage","An iconic waterfront landmark and a classic first stop.","Allow 30–60 minutes."],["Marine Drive","nature","A scenic seaside walk, particularly around sunset.","Allow 1–2 hours."],["Chhatrapati Shivaji Maharaj Vastu Sangrahalaya","heritage","A substantial museum for art and history lovers.","Allow 2–3 hours."],["Colaba Causeway","experience","Bustling street shopping and neighbourhood atmosphere.","Allow 1–2 hours."]],
+delhi:[["Humayun's Tomb","heritage","Mughal architecture and landscaped gardens.","Allow 1–2 hours."],["Lodhi Garden","nature","Peaceful greenery with historic monuments.","Allow 1–2 hours."],["Qutub Minar","heritage","A major historic landmark and monument complex.","Allow 1–2 hours."],["Chandni Chowk","experience","Old Delhi's busy markets and food culture; expect crowds.","Allow 1–3 hours."]],
+pune:[["Aga Khan Palace","heritage","A significant heritage site with connections to India's independence movement.","Allow 1–2 hours."],["Shaniwar Wada","heritage","A historic fortification in central Pune.","Allow 1 hour."],["Sinhagad Fort","nature","Hilltop views and a popular outdoor excursion; check conditions.","Allow half a day."],["Pataleshwar Cave Temple","heritage","Rock-cut architecture for a shorter cultural stop.","Allow 30–60 minutes."]],
+hyderabad:[["Charminar","heritage","Hyderabad's signature landmark amid lively streets.","Allow 1–2 hours."],["Golconda Fort","heritage","Expansive historic fort and viewpoints; expect walking.","Allow 2–3 hours."],["Salar Jung Museum","heritage","Extensive art and heritage collections.","Allow 2–3 hours."],["Hussain Sagar Lake","nature","Lakeside views and a relaxed evening option.","Allow 1–2 hours."]],
+kochi:[["Fort Kochi waterfront","experience","Heritage streets, coastal views and the Chinese fishing nets.","Allow 1–3 hours."],["Mattancherry Palace","heritage","Local history and murals; check opening days.","Allow 1 hour."],["Jew Town","experience","Atmospheric heritage lanes, antique shops and cafés.","Allow 1–2 hours."],["Marine Drive Kochi","nature","Waterfront promenade for a leisurely walk.","Allow 1 hour."]]
+};
+function renderExplore(){
+ const city=$("exploreCity").value,type=$("exploreType").value;
+ const items=(explorePlaces[city]||[]).filter(p=>type==="all"||p[1]===type);
+ const cityName=cities.find(c=>c.id===city)?.name||city;
+ $("exploreResults").innerHTML=items.length?items.map((p,i)=>{
+ const query=encodeURIComponent(p[0]+", "+cityName+", India");
+ const reviewUrl="https://www.google.com/maps/search/?api=1&query="+query;
+ return '<article class="explore-card"><span class="explore-index">'+String(i+1).padStart(2,"0")+' / '+escapeHtml(p[1])+'</span><h3>'+escapeHtml(p[0])+'</h3><p>'+escapeHtml(p[2])+'</p><p class="explore-duration">'+escapeHtml(p[3])+' · Suggested visit time</p><a class="pilllink" href="'+reviewUrl+'" target="_blank" rel="noopener">See map & current reviews ↗</a></article>';
+ }).join(""):'<p class="muted">No picks in this category yet. Try All experiences.</p>';
+}
+$("exploreCity").addEventListener("change",renderExplore);
+$("exploreType").addEventListener("change",renderExplore);
+renderExplore();
+const shareSiteBtn = document.getElementById("shareSiteBtn");
+if (shareSiteBtn) {
+  shareSiteBtn.addEventListener("click", async () => {
+    const shareUrl = "https://dswz1710.github.io/citysakhi/?utm_source=website&utm_medium=share&utm_campaign=organic";
+    const shareData = {
+      title: "CitySakhi — Your first city, made easier",
+      text: "Know someone moving to a new Indian city? CitySakhi offers free arrival guides, journey planning and first-week tips for six cities.",
+      url: shareUrl
+    };
+    const status = document.getElementById("shareSiteStatus");
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        if (status) status.textContent = "Thanks for sharing CitySakhi!";
+      } else if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+        if (status) status.textContent = "Link copied — share it with someone moving to a new city.";
+      } else {
+        window.prompt("Copy this CitySakhi link to share:", shareUrl);
+      }
+      if (typeof gtag === "function") gtag("event", "share_citysakhi", {method: navigator.share ? "native_share" : "copy_link"});
+    } catch (error) {
+      if (error && error.name !== "AbortError" && status) status.textContent = "You can copy the website link from the address bar to share it.";
+    }
+  });
+}
+
 </script></body></html>
