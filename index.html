@@ -294,10 +294,7 @@ footer{padding-top:48px;padding-bottom:48px}
 @media(max-width:680px){.explore-grid{grid-template-columns:1fr}.explore-card{min-height:0}}
 .discover-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:20px;background:#fff;border:1px solid #dce5df}.discover-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:24px}.discover-card{overflow:hidden;border:1px solid #dfe5e0;background:#fff;box-shadow:0 10px 28px #17352d0b;display:flex;flex-direction:column;min-width:0}.discover-photo{height:205px;background:#e5ece7;position:relative;overflow:hidden}.discover-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.discover-card:hover .discover-photo img{transform:scale(1.035)}.discover-photo .photo-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#476b5e;background:linear-gradient(135deg,#dce9e0,#f2e7d8);font-size:2rem}.discover-body{padding:20px;display:flex;flex-direction:column;flex:1}.discover-type{font-size:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:800;color:#537868}.discover-body h3{font-size:1.25rem;line-height:1.25;margin:9px 0}.discover-body p{font-size:.91rem;line-height:1.6}.discover-facts{display:grid;gap:9px;border-top:1px solid #e4e9e5;padding-top:13px;margin-top:auto}.discover-fact{font-size:.83rem;color:#52675f}.discover-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.discover-actions a{font-size:.8rem}.photo-credit{font-size:.68rem;color:#66766f;margin-top:8px}.discover-review-note{font-size:.75rem;color:#65756f;margin-top:10px}.discover-fit{background:#f4f7f3;border-radius:10px;padding:12px 14px;margin:8px 0 14px}.discover-fit strong,.discover-practical strong{font-size:.8rem;color:#244d40}.discover-fit p,.discover-practical p{margin:5px 0 0;font-size:.84rem;line-height:1.55;color:#52675f}.discover-practical{display:grid;gap:12px;border-top:1px solid #e4e9e5;padding-top:13px;margin-top:13px}.discover-practical>div{padding-left:11px;border-left:3px solid #d8e5dc}@media(max-width:900px){.discover-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.discover-grid,.discover-controls{grid-template-columns:1fr}.discover-photo{height:220px}}</style>
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-G3RH7GJ4V0">
-</script>
-
-</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G3RH7GJ4V0"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -658,47 +655,9 @@ function renderDiscover(){
  }).join("");
 }
 discoverCity.addEventListener("change",renderDiscover);discoverCategory.addEventListener("change",renderDiscover);renderDiscover();
-</script></body></html>
-=$("discoverCity"),discoverCategory=$("discoverCategory");
-cities.forEach(c=>{const option=document.createElement("option");option.value=c.id;option.textContent=c.name;discoverCity.appendChild(option);});
-discoverCity.value="bengaluru";
-function renderDiscover(){
- const chosen=discoverPlaces.filter(p=>p.city===discoverCity.value&&(discoverCategory.value==="all"||p.category===discoverCategory.value));
- $("discoverResults").innerHTML=chosen.map(p=>{
-  const cityName=cities.find(c=>c.id===p.city).name;
-  const reviewUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.name+", "+cityName+", India");
-  return '<article class="discover-card"><div class="discover-photo"><div class="photo-fallback" aria-hidden="true">✦</div><img src="'+p.photo+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.display=\'none\'"></div><div class="discover-body"><span class="discover-type">'+esc(p.category)+'</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.why)+'</p><div class="discover-facts"><div class="discover-fact">◷ <strong>Best time:</strong> '+esc(p.best)+'</div><div class="discover-fact">⌛ <strong>Suggested visit:</strong> '+esc(p.duration)+'</div><div class="discover-fact">₹ <strong>Entry:</strong> '+esc(p.fee)+'</div></div><div class="discover-actions"><a class="pilllink" href="'+reviewUrl+'" target="_blank" rel="noopener">Reviews & map ↗</a><a class="pilllink" href="'+p.official+'" target="_blank" rel="noopener">Official info ↗</a></div><div class="photo-credit">'+esc(p.credit)+'</div><div class="discover-review-note">Review scores are shown by the linked map provider and are not copied or fabricated here.</div></div></article>';
- }).join("");
-}
-discoverCity.addEventListener("change",renderDiscover);discoverCategory.addEventListener("change",renderDiscover);renderDiscover();
-</script></body></html>
-=$("discoverCity"),discoverCategory=$("discoverCategory");
-cities.forEach(c=>{const option=document.createElement("option");option.value=c.id;option.textContent=c.name;discoverCity.appendChild(option);});
-discoverCity.value="bengaluru";
-function renderDiscover(){
- const chosen=discoverPlaces.filter(p=>p.city===discoverCity.value&&(discoverCategory.value==="all"||p.category===discoverCategory.value));
- $("discoverResults").innerHTML=chosen.map(p=>{
-  const cityName=cities.find(c=>c.id===p.city).name;
-  const reviewUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.name+", "+cityName+", India");
-  return '<article class="discover-card"><div class="discover-photo"><div class="photo-fallback" aria-hidden="true">✦</div><img src="'+p.photo+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.display=\'none\'"></div><div class="discover-body"><span class="discover-type">'+esc(p.category)+'</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.why)+'</p><div class="discover-facts"><div class="discover-fact">◷ <strong>Best time:</strong> '+esc(p.best)+'</div><div class="discover-fact">⌛ <strong>Suggested visit:</strong> '+esc(p.duration)+'</div><div class="discover-fact">₹ <strong>Entry:</strong> '+esc(p.fee)+'</div></div><div class="discover-actions"><a class="pilllink" href="'+reviewUrl+'" target="_blank" rel="noopener">Reviews & map ↗</a><a class="pilllink" href="'+p.official+'" target="_blank" rel="noopener">Official info ↗</a></div><div class="photo-credit">'+esc(p.credit)+'</div><div class="discover-review-note">Review scores are shown by the linked map provider and are not copied or fabricated here.</div></div></article>';
- }).join("");
-}
-discoverCity.addEventListener("change",renderDiscover);discoverCategory.addEventListener("change",renderDiscover);renderDiscover();
-</script></body></html>
-=$("discoverCity"),discoverCategory=$("discoverCategory");
-cities.forEach(c=>{const option=document.createElement("option");option.value=c.id;option.textContent=c.name;discoverCity.appendChild(option);});
-discoverCity.value="bengaluru";
-function renderDiscover(){
- const chosen=discoverPlaces.filter(p=>p.city===discoverCity.value&&(discoverCategory.value==="all"||p.category===discoverCategory.value));
- $("discoverResults").innerHTML=chosen.map(p=>{
-  const cityName=cities.find(c=>c.id===p.city).name;
-  const reviewUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(p.name+", "+cityName+", India");
-  return '<article class="discover-card"><div class="discover-photo"><div class="photo-fallback" aria-hidden="true">✦</div><img src="'+p.photo+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.display=\'none\'"></div><div class="discover-body"><span class="discover-type">'+esc(p.category)+'</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.why)+'</p><div class="discover-facts"><div class="discover-fact">◷ <strong>Best time:</strong> '+esc(p.best)+'</div><div class="discover-fact">⌛ <strong>Suggested visit:</strong> '+esc(p.duration)+'</div><div class="discover-fact">₹ <strong>Entry:</strong> '+esc(p.fee)+'</div></div><div class="discover-actions"><a class="pilllink" href="'+reviewUrl+'" target="_blank" rel="noopener">Reviews & map ↗</a><a class="pilllink" href="'+p.official+'" target="_blank" rel="noopener">Official info ↗</a></div><div class="photo-credit">'+esc(p.credit)+'</div><div class="discover-review-note">Review scores are shown by the linked map provider and are not copied or fabricated here.</div></div></article>';
- }).join("");
-}
-discoverCity.addEventListener("change",renderDiscover);discoverCategory.addEventListener("change",renderDiscover);renderDiscover();
 
-// Explore cards are initialized after the page markup and shared helpers are available.
+
+// Explore cards: run after the document and shared helpers are available.
 const explorePlaces={
 bengaluru:[["Lalbagh Botanical Garden","nature","Best for gardens, photography and relaxed walks.","Allow 1–2 hours."],["Cubbon Park","nature","A central green escape that pairs well with nearby museums.","Allow 1–2 hours."],["Bengaluru Palace","heritage","Distinctive royal architecture; consider entry costs before visiting.","Allow 1–2 hours."],["KR Market","experience","A lively local market, especially interesting for early-morning photography.","Allow 45–90 minutes."]],
 mumbai:[["Gateway of India","heritage","An iconic waterfront landmark and a classic first stop.","Allow 30–60 minutes."],["Marine Drive","nature","A scenic seaside walk, particularly around sunset.","Allow 1–2 hours."],["Chhatrapati Shivaji Maharaj Vastu Sangrahalaya","heritage","A substantial museum for art and history lovers.","Allow 2–3 hours."],["Colaba Causeway","experience","Bustling street shopping and neighbourhood atmosphere.","Allow 1–2 hours."]],
@@ -720,6 +679,8 @@ function renderExplore(){
 $("exploreCity").addEventListener("change",renderExplore);
 $("exploreType").addEventListener("change",renderExplore);
 renderExplore();
+
+
 const shareSiteBtn = document.getElementById("shareSiteBtn");
 if (shareSiteBtn) {
   shareSiteBtn.addEventListener("click", async () => {
